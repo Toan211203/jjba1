@@ -19,9 +19,16 @@ pipeline {
                 echo 'Testing...'
                 script {
                     if (fileExists('hello.py')) {
-                        echo 'File hello.py found. Running the script...'
+                        echo 'File hello.py found. Displaying its content:'
+                        
+                        // Đọc nội dung file hello.py và in ra console
+                        def content = readFile('hello.py')
+                        echo "${content}"
+        
+                        // Chạy script hello.py và in ra đầu ra
+                        echo 'Running the script...'
                         def output = sh(script: 'python3 hello.py', returnStdout: true).trim()
-                        echo "Output: ${output}"
+                        echo "Output from hello.py: ${output}"
                     } else {
                         error 'File hello.py does not exist!'
                     }
