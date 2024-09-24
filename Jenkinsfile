@@ -11,13 +11,22 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                // Thêm lệnh build ở đây, ví dụ: sh 'make'
+                sh 'python hello.py'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing...'
-                // Thêm lệnh test ở đây, ví dụ: sh 'make test'
+                script {
+                    // Kiểm tra xem file hello.py có tồn tại không
+                    if (fileExists('hello.py')) {
+                        echo 'File hello.py found. Running the script...'
+                        def output = sh(script: 'python hello.py', returnStdout: true).trim()
+                        echo "Output: ${output}"
+                    } else {
+                        error 'File hello.py does not exist!'
+                    }
+                }
             }
         }
         stage('Deploy') {
