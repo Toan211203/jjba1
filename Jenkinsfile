@@ -5,7 +5,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 echo 'Cloning repository...'
-                git 'https://github.com/Toan211203/jjba1.git'
+                git 'https://github.com/Toan211203/emo2_jenkin.git'
             }
         }
         stage('Build') {
